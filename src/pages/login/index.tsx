@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Button } from 'antd';
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +16,7 @@ export default function Home() {
     <div
       className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
     >
-      <Button type="primary">Button</Button>
+      <main className = 'flex flex-col items-center justify-center w-full h-full'>login page</main>
     </div>
   );
 }
