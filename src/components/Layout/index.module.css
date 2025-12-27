@@ -1,9 +1,29 @@
 .header {
     font-size: 20px;
-    color : white;
+    color: white;
     font-weight: bold;
 }
 
 .logo {
+    margin-right: 8px;
+    display: inline-block;
+}
 
+.user {
+    float: right;
+    font-size: 15px;
+}
+
+.sectionInner {
+    height: calc(100vh - 64px);
+}
+
+.sectionContent {
+    padding: 32px;
+}
+
+.content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
 }

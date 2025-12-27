@@ -12,11 +12,5 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className = 'flex flex-col items-center justify-center w-full h-full'>login page</main>
-    </div>
-  );
+  return <>user</>;
 }

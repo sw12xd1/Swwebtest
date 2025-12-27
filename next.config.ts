@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   reactStrictMode: true,
+  async rewrites() {
+    return [{
+      source: '/api/:path*',
+      destination: 'https://mock.apifox.cn/m1/2398938-0-default/api/:path*',
+      // destination: 'https://localhost:3000/api/:path*'
+    }];
+  }
 };
 
 export default nextConfig;
