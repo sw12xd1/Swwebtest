@@ -49,8 +49,7 @@
             style="margin-top: 25px;"
             @Change="handleChange"
         />
-
-        <BisaiPopout v-model="dialogVisible" />
+<!-- <BisaiPopout v-model="dialogVisible" /> -->
     </div> 
 </template>
 
@@ -61,7 +60,15 @@ import request from '../utils/request'
 import BisaiPopout from '../components/bisaiPopout.vue'
 
 // 弹窗
-const dialogVisible = ref(false)
+// const currentData = ref({})
+// const dialogVisible = ref(false)
+
+// const handleAdd = (row) => {
+//     if(!row.id){
+//         currentData.value = {}
+//         dialogVisible.value = true
+//     }
+// }
 
 // 表格数据
 const tableData = ref([])
