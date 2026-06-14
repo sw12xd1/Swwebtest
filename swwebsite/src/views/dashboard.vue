@@ -9,7 +9,7 @@
         <el-table :data="tableData" style="width: 100%">
             <el-table-column fixed="left" prop="created_at" label="创建日期" width="180">
                 <template #default="{row}">
-                    {{ row.created_at?.slice(0, 10) }}
+                    {{ row.created_at }}
                 </template>
             </el-table-column>
             <el-table-column prop="isCold" label="是否着凉" min-width="100">

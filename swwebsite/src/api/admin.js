@@ -24,15 +24,16 @@ export default{
     createTask(data) {
         return service.post('task/add', data)
     },
-    getTask(data) {
+    getTasks(data) {
         return service.get('task/page', data)
     },
-    getTaskById(id) {
-        return service.get(`task/${id}`)
+    updateTaskStatus(id, data) {
+        return service.put(`task/update/status/${id}`, data)
     },
     deleteTask(id) {
         return service.delete(`task/${id}`)
     },
-
-
+    updateTask(id, data) {
+        return service.put(`/task/update/task/${id}`, data)
+    },
 }

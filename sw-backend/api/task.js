@@ -7,12 +7,12 @@ const router = require('express').Router()
  */
 router.post('/add', async (req, res) => {
   try {
-    const { text, status, priority, created_at } = req.body
+    const { text, status, priority, created_at, deadline } = req.body
     const sql = `
-      INSERT INTO task (text, status, priority, created_at) 
-      VALUES (?, ?, ?, ?)
+      INSERT INTO task (text, status, priority, created_at, deadline) 
+      VALUES (?, ?, ?, ?, ?)
     `
-    await db.query(sql, [text, status, priority, created_at])
+    await db.query(sql, [text, status, priority, created_at, deadline])
     res.json({ code: 200, message: '新增成功' })
   } catch (err) {
     console.error(err)
@@ -21,24 +21,30 @@ router.post('/add', async (req, res) => {
 })
 
 /**
- * 编辑任务（支持修改全部字段：内容、状态、优先级、时间）
+ * 编辑状态
  */
-router.put('/:id', async (req, res) => {
+router.put('/update/status/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const { text, status, priority, created_at } = req.body
-    const sql = `
-      UPDATE task 
-      SET text=?, status=?, priority=?, created_at=? 
-      WHERE id=?
-    `
-    await db.query(sql, [text, status, priority, created_at, id])
-    return res.json({ code: 200, message: '编辑成功' })
+    const {status} = req.body
+    const sql = `UPDATE task SET status=? WHERE id=?`
+    await db.query(sql, [status, id])
+    return res.json({ code: 200, message: '编辑状态成功' })
   } catch (err) {
     console.error(err)
     res.status(500).json({ code: 500, error: err.message })
   }
 })
+
+// 编辑任务
+router.put('/update/task/:id', async(req, res) => {
+  const { id } = req.params
+  const { text, priority, created_at, deadline, status } = req.body  // ← 加 status
+  const sql = `UPDATE task SET text=?, priority=?, created_at=?, deadline=?, status=? WHERE id=?`
+  await db.query(sql, [text, priority, created_at, deadline, status, id])  // ← 加 status
+  return res.json({ code: 200, message: '编辑任务成功' })
+})
+
 
 /**
  * 删除任务
@@ -54,32 +60,22 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-/**
- * 分页查询任务列表（返回 priority 优先级字段）
- */
+
+// 获取数据
 router.get('/page', async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1
-    const pageSize = parseInt(req.query.pageSize) || 10
-    const offset = (page - 1) * pageSize
-
-    // 总条数
-    const [totalResult] = await db.query('SELECT COUNT(*) AS total FROM task')
-    const total = totalResult[0].total
-
-    // 查询：带出 priority 字段
+    // 查询全部数据
     const [rows] = await db.query(
-      `SELECT id, text, status, priority, created_at 
-       FROM task 
-       ORDER BY created_at DESC 
-       LIMIT ?, ?`,
-      [offset, pageSize]
+      `SELECT id, text, status, priority, 
+      DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at, 
+      DATE_FORMAT(deadline, '%Y-%m-%d') AS deadline 
+      FROM task 
+      ORDER BY created_at DESC`
     )
 
     res.json({
       code: 200,
-      data: rows,
-      total: total
+      data: rows
     })
   } catch (err) {
     console.error(err)
