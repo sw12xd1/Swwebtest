@@ -15,10 +15,18 @@ const BackEndRouter = [
                 }
             },
             {
+                path: 'sleep',
+                component: () => import('@/views/sleep.vue'),
+                meta: {
+                    title: '睡眠分析',
+                    icon: 'Avatar'
+                }
+            },
+            {
                 path: 'tasklist',
                 component: () => import('@/views/tasklist.vue'),
                 meta: {
-                    title: '任务列表',
+                    title: '任务清单',
                     icon: 'List'
                 }
             },
@@ -30,14 +38,7 @@ const BackEndRouter = [
                     icon: 'Notebook'
                 }
             },
-            {
-                path: 'sleep',
-                component: () => import('@/views/sleep.vue'),
-                meta: {
-                    title: '睡眠',
-                    icon: 'Avatar'
-                }
-            }
+            
         ]
     }
 ]

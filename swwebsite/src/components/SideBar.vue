@@ -32,7 +32,7 @@ import { computed } from 'vue'
 const isCollapsed = computed(() => useAdminStore().isCollapsed)
 
 const router = useRouter()
-console.log(router)
+console.log("当前路由数据",router)
 const IconUrl = new URL('@/assets/images/logo.png', import.meta.url).href
 
 const selectMenu = (key) => {

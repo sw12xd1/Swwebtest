@@ -10,7 +10,7 @@
             <router-view class="content-container"></router-view>
         </el-main>
       </el-container>
-    </el-container>r
+    </el-container>
 
   </div>
 </template>
@@ -25,6 +25,9 @@ import NavBar from './NavBar.vue';
    height: 100vh;
   .el-header {
     height: 71.4px !important;
+  }
+  .main-content {
+    overflow: hidden;
   }
   .main-container {
     height:100%;

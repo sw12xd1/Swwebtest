@@ -2,43 +2,43 @@
     <div>
         <PageHead title="鼻塞分析">
             <template #buttons>
-                <el-button type="primary" size="normal" @click="handleAdd({})">新增</el-button>
+                <el-button type="primary" @click="handleEdit({})">新增</el-button>
             </template>
         </PageHead>
 
         <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="created_at" label="创建日期" mini-width="16.67%">
+            <el-table-column fixed="left" prop="created_at" label="创建日期" width="180">
                 <template #default="{row}">
                     {{ row.created_at?.slice(0, 10) }}
                 </template>
             </el-table-column>
-            <el-table-column prop="isCold" label="是否着凉" mini-width="16.67%">
+            <el-table-column prop="isCold" label="是否着凉" min-width="100">
                 <template #default="{ row }">
                     {{ row.isCold ? '是' : '否' }}
                 </template>
             </el-table-column>
-            <el-table-column prop="isFan" label="是否吹风扇" mini-width="16.67%">
+            <el-table-column prop="isFan" label="是否吹风扇" min-width="100">
                 <template #default="{ row }">
                     {{ row.isFan ? '是' : '否' }}
                 </template>
             </el-table-column>
-            <el-table-column prop="isSelf" label="是否自慰" mini-width="16.67%">
+            <el-table-column prop="isSelf" label="是否自卫" min-width="100">
                 <template #default="{ row }">
                     {{ row.isSelf ? '是' : '否' }}
                 </template>
             </el-table-column>
-            <el-table-column prop="isSpray" label="是否喷药" mini-width="16.67%">
+            <el-table-column prop="isSpray" label="是否喷药" min-width="100">
                 <template #default="{ row }">
                     {{ row.isSpray ? '是' : '否' }}
                 </template>
             </el-table-column>
-            <el-table-column prop="moodDegree" label="心情愉悦程度" mini-width="16.67%"/>
-            <el-table-column prop="bisaiDegree" label="鼻塞程度" mini-width="16.67%"/>
+            <el-table-column prop="moodDegree" label="心情愉悦程度" min-width="100"/>
+            <el-table-column prop="bisaiDegree" label="鼻塞程度" min-width="100"/>
 
-            <el-table-column label="操作" mini-width="20%" fixed="right">
+            <el-table-column label="操作" width="150" fixed="right">
                 <template #default="scope">
-                    <el-button @click="editRow(scope)" type="primary" size="small">编辑</el-button>
-                    <el-button type="danger" size="small">删除</el-button>
+                    <el-button text @click="handleEdit(scope.row)" type="primary" size="small">编辑</el-button>
+                    <el-button text @click="handleDelete(scope.row.id)" type="danger" size="small">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -47,31 +47,67 @@
             :page-size="pagination.pageSize"
             :total="pagination.total"
             style="margin-top: 25px;"
-            @Change="handleChange"
+            @current-change="handleChange"
         />
-<!-- <BisaiPopout v-model="dialogVisible" /> -->
+        <BisaiDialog v-model:modelValue="dialogVisible" :bisaiRow="currentRow" @success="handleSuccess"/>
     </div> 
 </template>
 
 <script setup>
 import PageHead from '../components/PageHead.vue'
 import { ref, onMounted } from 'vue'
-import request from '../utils/request'
-import BisaiPopout from '../components/bisaiPopout.vue'
+import adminApi from '../api/admin.js'
+import BisaiDialog from '../components/BisaiDialog.vue'
+import { ElMessageBox, ElMessage } from 'element-plus'
+const tableData = ref([])
 
 // 弹窗
-// const currentData = ref({})
-// const dialogVisible = ref(false)
+const dialogVisible = ref(false)
 
-// const handleAdd = (row) => {
-//     if(!row.id){
-//         currentData.value = {}
-//         dialogVisible.value = true
-//     }
-// }
+// 弹窗 成功回调
+const handleSuccess = () => {
+    dialogVisible.value = false
+    currentRow.value = null
+    getPageData()
+}
 
-// 表格数据
-const tableData = ref([])
+// 编辑数据
+const currentRow = ref(null)
+const handleEdit = (row) => {
+    if(!row.id){
+        currentRow.value = null
+        dialogVisible.value = true
+    }else{
+        // 编辑回显
+        adminApi.getBisaiById(row.id).then(res => {
+            console.log("scope.row/currentRow/formData 数据", row)
+            console.log("当前行数据", res)
+            currentRow.value = res.data
+            dialogVisible.value = true
+        })
+    }
+}
+
+// 删除接口
+const handleDelete = async (id) => {
+    ElMessageBox.confirm(
+        '你确定要删除吗?',
+        '确认',
+        {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }
+    )
+    .then(() => {
+        adminApi.deleteBisai(id).then(res => {
+            console.log("删除数据", res)
+            ElMessage.success('删除成功')
+            getPageData()
+        })
+    })
+}
+
 
 // 分页数据
 const pagination = ref({
@@ -80,35 +116,16 @@ const pagination = ref({
     currentPage: 1,
 })
 
-// 获取数据
-const fetchData = async () => {
-    try{
-        const res = await request.get('/bisai')
-        tableData.value = res
-    }catch(err){
-        console.error('获取数据失败：', err)
-    }
-}
-
-// 编辑数据
-const editRow = (scope) => {
-    try{
-        console.log(scope)
-    }
-    catch(err){
-        console.error('编辑数据失败：', err)
-    }
-}
-
 // 分页接口
 const getPageData = async () => {
     try{
-        const res = await request.get('/bisai/page', {
-            params: {
+        const res = await adminApi.getBisai({
+            params:{
                 page: pagination.value.currentPage,
                 pageSize: pagination.value.pageSize,
             }
         })
+        console.log("当前页数据", res)
         tableData.value = res.data
         pagination.value.total = res.total
     }catch(err){
@@ -116,12 +133,16 @@ const getPageData = async () => {
     }
 }
 
+// 分页改变
 const handleChange = (page) => {
     pagination.value.currentPage = page
     getPageData()
 }
 
+
 onMounted(() => {
     getPageData()
 })
+
 </script>
+
