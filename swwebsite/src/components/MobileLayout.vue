@@ -1,5 +1,8 @@
 <template>
   <div class="mobile-layout">
+    <header class="mobile-header">
+      <h1 class="mobile-title">{{ pageTitle }}</h1>
+    </header>
     <main class="mobile-main">
       <router-view />
     </main>
@@ -41,7 +44,7 @@ const pageTitle = computed(() => {
 .mobile-layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 480px;
   margin: 0 auto;
   background: #f5f5f5;
@@ -64,7 +67,6 @@ const pageTitle = computed(() => {
 
 .mobile-main {
   flex: 1;
-  overflow-y: auto;
   padding: 12px;
 }
 
