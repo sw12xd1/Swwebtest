@@ -109,7 +109,7 @@ onMounted(() => getPageData())
 :deep(.el-dialog) {
   width: 92% !important;
   max-width: 92vw !important;
-  top: -14vh !important;
+  top: -20vh !important;
 }
 :deep(.el-dialog__body) {
   padding: 16px 12px;
