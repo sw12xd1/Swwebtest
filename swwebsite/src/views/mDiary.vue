@@ -91,7 +91,7 @@ onMounted(() => getPageData())
 </script>
 
 <style scoped lang="scss">
-.m-page { padding-bottom: 16px; }
+.m-page { padding-bottom: 16px; background: transparent; }
 .m-toolbar { display: flex; justify-content: flex-end; margin-bottom: 12px; }
 .m-empty { text-align: center; color: #909399; padding: 40px 0; }
 .m-list { display: flex; flex-direction: column; gap: 10px; }

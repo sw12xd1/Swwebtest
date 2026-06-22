@@ -148,7 +148,7 @@ onMounted(() => fetchData())
 </script>
 
 <style scoped lang="scss">
-.m-page { padding-bottom: 16px; }
+.m-page { padding-bottom: 16px; background: transparent; }
 .m-add-bar { display: flex; gap: 6px; margin-bottom: 12px; }
 .m-filters { display: flex; justify-content: center; margin-bottom: 12px; }
 .m-empty { text-align: center; color: #909399; padding: 40px 0; }

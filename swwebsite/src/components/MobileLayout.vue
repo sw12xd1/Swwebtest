@@ -4,7 +4,11 @@
       <h1 class="mobile-title">{{ pageTitle }}</h1>
     </header>
     <main class="mobile-main">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade-slide" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </main>
     <nav class="mobile-tabs">
       <router-link
@@ -46,14 +50,14 @@ const pageTitle = computed(() => {
   min-height: 100vh;
   max-width: 480px;
   margin: 0 auto;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 25%, #e0f2fe 50%, #d1f2eb 75%, #cce5ff 100%);
   padding-bottom: 56px;
 }
 
 .mobile-header {
   padding: 12px 16px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 25%, #e0f2fe 50%, #d1f2eb 75%, #cce5ff 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .mobile-title {
@@ -61,7 +65,8 @@ const pageTitle = computed(() => {
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  color: #303133;
+  color: #1e3a5f;
+  animation: textIn 0.5s ease both;
 }
 
 .mobile-main {
@@ -76,10 +81,76 @@ const pageTitle = computed(() => {
   width: 100%;
   max-width: 480px;
   display: flex;
-  background: #fff;
-  border-top: 1px solid #eee;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 25%, #e0f2fe 50%, #d1f2eb 75%, #cce5ff 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
   padding: 6px 0 env(safe-area-inset-bottom, 6px);
   z-index: 100;
+}
+
+/* 路由切换动画 */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s ease;
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+/* 标题文字动画 */
+@keyframes textIn {
+  from { opacity: 0; transform: translateY(-8px); letter-spacing: 4px; }
+  to   { opacity: 1; transform: translateY(0);   letter-spacing: 0; }
+}
+
+/* 卡片入场逐行动画 */
+.mobile-main :deep(.m-card),
+.mobile-main :deep(.m-task-card) {
+  animation: cardIn 0.4s ease both;
+}
+@for $i from 1 through 20 {
+  .mobile-main :deep(.m-list > *:nth-child(#{$i})) {
+    animation-delay: #{$i * 0.06}s;
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 卡片内文字逐行动画 */
+.mobile-main :deep(.m-card-head),
+.mobile-main :deep(.m-card-info),
+.mobile-main :deep(.m-card-tags),
+.mobile-main :deep(.m-indicators),
+.mobile-main :deep(.m-content),
+.mobile-main :deep(.m-ai),
+.mobile-main :deep(.m-task-row) {
+  animation: lineIn 0.35s ease both;
+}
+.mobile-main :deep(.m-card-head)        { animation-delay: 0.08s; }
+.mobile-main :deep(.m-card-info)        { animation-delay: 0.14s; }
+.mobile-main :deep(.m-card-tags)        { animation-delay: 0.2s; }
+.mobile-main :deep(.m-indicators)       { animation-delay: 0.14s; }
+.mobile-main :deep(.m-content)          { animation-delay: 0.2s; }
+.mobile-main :deep(.m-ai)               { animation-delay: 0.26s; }
+.mobile-main :deep(.m-card-actions)     { animation-delay: 0.3s; }
+.mobile-main :deep(.m-task-row)         { animation-delay: 0.1s; }
+
+@keyframes lineIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .tab-item {

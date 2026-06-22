@@ -102,6 +102,7 @@ onMounted(() => getPageData())
 <style scoped lang="scss">
 .m-page {
   padding-bottom: 16px;
+  background: transparent;
 }
 
 .m-toolbar {
