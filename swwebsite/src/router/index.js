@@ -32,7 +32,7 @@ const BackEndRouter = [
             },            
             {
                 path: 'tasklist',
-                component: () => import('@/views/tasklist.vue'),
+                component: () => import('@/views/TaskList.vue'),
                 meta: {
                     title: '任务清单',
                     icon: 'List'

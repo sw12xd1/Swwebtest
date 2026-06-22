@@ -1,10 +1,11 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'sw12',
+    host: '0zzcn4.h.filess.io',
+    user: 'sw12_somehowpay',
+    password: '3e7afd4b6d7bca0fe05251e48daf6a9cec86762a',
+    database: 'sw12_somehowpay',
+    port: 3307,
     timezone: 'Z',
     decimalNumbers: true
 });
