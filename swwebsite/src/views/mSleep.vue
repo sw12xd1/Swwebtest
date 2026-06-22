@@ -111,11 +111,12 @@ onMounted(() => getPageData())
 :deep(.el-dialog) {
   width: 92% !important;
   max-width: 92vw !important;
+  top: -6vh !important;
 }
 :deep(.el-dialog__body) {
   padding: 16px 12px;
 }
 :deep(.el-form-item__label) {
-  width: 80px !important;
+  width: 90px !important;
 }
 </style>
