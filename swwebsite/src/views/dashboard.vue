@@ -32,10 +32,9 @@
                     {{ row.isSpray ? '是' : '否' }}
                 </template>
             </el-table-column>
-            <el-table-column prop="moodDegree" label="心情愉悦程度" min-width="100"/>
             <el-table-column prop="bisaiDegree" label="鼻塞程度" min-width="100"/>
 
-            <el-table-column label="操作" width="150" fixed="right">
+            <el-table-column label="操作" width="140" fixed="right" align="center">
                 <template #default="scope">
                     <el-button text @click="handleEdit(scope.row)" type="primary" size="small">编辑</el-button>
                     <el-button text @click="handleDelete(scope.row.id)" type="danger" size="small">删除</el-button>

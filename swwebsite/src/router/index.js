@@ -23,6 +23,14 @@ const BackEndRouter = [
                 }
             },
             {
+                path: 'diary',
+                component: () => import('@/views/diary.vue'),
+                meta: {
+                    title: '日志记录',
+                    icon: 'Notebook'
+                }
+            },            
+            {
                 path: 'tasklist',
                 component: () => import('@/views/tasklist.vue'),
                 meta: {
@@ -30,14 +38,7 @@ const BackEndRouter = [
                     icon: 'List'
                 }
             },
-            {
-                path: 'diary',
-                component: () => import('@/views/diary.vue'),
-                meta: {
-                    title: '日记',
-                    icon: 'Notebook'
-                }
-            },
+
             
         ]
     }

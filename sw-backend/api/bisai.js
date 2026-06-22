@@ -6,9 +6,9 @@ router.post('/add', async (req, res) => {
     try {
         const { created_at, isFan, isCold, isSelf, isSpray, moodDegree, bisaiDegree } = req.body
         await db.query(
-            `INSERT INTO bisai (isFan, isCold, isSelf, isSpray, moodDegree, bisaiDegree, created_at) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [isFan, isCold, isSelf, isSpray, moodDegree, bisaiDegree, created_at]
+            `INSERT INTO bisai (isFan, isCold, isSelf, isSpray, bisaiDegree, created_at) 
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [isFan, isCold, isSelf, isSpray, bisaiDegree, created_at]
         )
         res.json({ code: 200, message: '新增成功' })
     } catch (err) {
@@ -21,12 +21,12 @@ router.post('/add', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const { created_at, isFan, isCold, isSelf, isSpray, moodDegree, bisaiDegree } = req.body
+        const { created_at, isFan, isCold, isSelf, isSpray, bisaiDegree } = req.body
         await db.query(
             `UPDATE bisai 
-             SET created_at=?, isFan=?, isCold=?, isSelf=?, isSpray=?, moodDegree=?, bisaiDegree=? 
+             SET created_at=?, isFan=?, isCold=?, isSelf=?, isSpray=?, bisaiDegree=? 
              WHERE id=?`,
-            [created_at, isFan, isCold, isSelf, isSpray, moodDegree, bisaiDegree, id]
+            [created_at, isFan, isCold, isSelf, isSpray, bisaiDegree, id]
         )
         return res.json({ code: 200, message: '编辑成功' })
     } catch (err) {
@@ -68,7 +68,6 @@ router.get('/page', async (req, res) => {
           isCold,
           isSelf,
           isSpray,
-          moodDegree,
           bisaiDegree,
           DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at
          FROM bisai 
@@ -87,11 +86,34 @@ router.get('/page', async (req, res) => {
     }
 })
 
+router.get('/date/:date', async (req, res) => {
+    try {
+        const { date } = req.params
+        const [rows] = await db.query(
+            'SELECT bisaiDegree FROM bisai WHERE DATE(created_at) = ? LIMIT 1',
+            [date]
+        )
+        res.json({ code: 200, data: rows[0] || null })
+    } catch (err) {
+        res.status(500).json({ code: 500, error: err.message })
+    }
+})
 // 获取某一行
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const [rows] = await db.query('SELECT * FROM bisai WHERE id = ?', [id])
+        const [rows] = await db.query(
+            `SELECT 
+                id,
+                DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at,
+                isFan,
+                isCold,
+                isSelf,
+                isSpray,
+                bisaiDegree
+             FROM bisai WHERE id = ?`,
+            [id]
+        )
         if (rows.length === 0) {
             return res.status(404).json({ code: 404, message: 'bisai not found' })
         }

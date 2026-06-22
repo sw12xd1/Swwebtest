@@ -106,16 +106,19 @@ defineExpose({ open })
 .form-status {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #e8e0d4;
+  gap: 5px;
+  padding: 0;
+  :deep(.el-radio-group) {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
 }
 
 .status-label {
   font-size: 13px;
   color: #8c8378;
   flex-shrink: 0;
+  padding: 0 10px 0;
 }
 
 .form-input { width: 100%; }

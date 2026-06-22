@@ -20,9 +20,6 @@
             <el-form-item prop="isCold" label="是否着凉">
                 <el-switch prop="isCold" v-model="formData.isCold"  
                 inline-prompt 
-                style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" 
-                active-text="Y" 
-                inactive-text="N"
                 :active-value="1" 
                 :inactive-value="0" 
                 />
@@ -31,9 +28,6 @@
                 <el-switch 
                     v-model="formData.isFan" 
                     inline-prompt 
-                    style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-                    active-text="Y" 
-                    inactive-text="N"
                     :active-value="1" 
                     :inactive-value="0"
                 />
@@ -43,9 +37,6 @@
                 <el-switch 
                     v-model="formData.isSelf" 
                     inline-prompt 
-                    style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-                    active-text="Y" 
-                    inactive-text="N" 
                     :active-value="1" 
                     :inactive-value="0"
                 />
@@ -55,22 +46,11 @@
                 <el-switch 
                     v-model="formData.isSpray" 
                     inline-prompt 
-                    style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-                    active-text="Y" 
-                    inactive-text="N" 
                     :active-value="1" 
                     :inactive-value="0"
                 />
             </el-form-item>
 
-            <el-form-item label="心情愉悦程度" prop="moodDegree">
-                <el-slider 
-                    v-model="formData.moodDegree" 
-                    :max="10" 
-                    style="width: 350px"
-                    :step="0.1"
-                />
-            </el-form-item>
 
             <el-form-item label="鼻塞程度" prop="bisaiDegree">
                 <el-slider 
@@ -106,8 +86,7 @@ const formData = reactive({
   isFan: 0,
   isSelf: 0,
   isSpray: 0,
-  moodDegree: 0,
-  bisaiDegree: 0,
+  bisaiDegree: 5,
 })
 
 // rules

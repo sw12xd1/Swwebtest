@@ -36,4 +36,31 @@ export default{
     updateTask(id, data) {
         return service.put(`/task/update/task/${id}`, data)
     },
+
+    // sleep view
+    createSleep(data) {
+        return service.post('sleep/add', data)
+    },
+    getSleep(data) {
+        return service.get('sleep/page', data)
+    },
+    getSleepById(id) {
+        return service.get(`sleep/${id}`)
+    },
+    updateSleep(id, data) {
+        return service.put(`sleep/${id}`, data)
+    },
+    deleteSleep(id) {
+        return service.delete(`sleep/${id}`)
+    },
+
+    // diary view
+    getDiary: (config) => service.get('/diary/page', config),
+    getDiaryById: (id) => service.get(`/diary/${id}`),
+    createDiary: (data) => service.post('/diary/add', data),
+    updateDiary: (id, data) => service.put(`/diary/${id}`, data),
+    deleteDiary: (id) => service.delete(`/diary/${id}`),
+
+    getBisaiByDate: (date) => service.get(`/bisai/date/${date}`),
+    getSleepByDate: (date) => service.get(`/sleep/date/${date}`),
 }

@@ -262,7 +262,7 @@ onMounted(() => {
 .board{
   --tape-mid: #d9a24b;
   --tape-urgent: #c9684e;
-  --tape-plan: #7a93b3;
+  --tape-plan: #325481;
   --tape-busy: #d9a24b;
   --tape-free: #93a382;
 
@@ -274,7 +274,6 @@ onMounted(() => {
   background-image: linear-gradient(#f2ece1 1.3px, transparent 1px) !important;
   background-size: 100% 36px !important;
 
-  
   .tape {
     position: absolute;
     border-radius: 1px;
@@ -393,14 +392,39 @@ onMounted(() => {
   .list {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 10px 4px 0;       
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+
+    max-height: 58vh;          
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    // 渐变遮罩：提示下方还有内容（用父容器的伪元素实现，见下方 .list-wrap）
+    scroll-behavior: smooth;
+
+    // ── 自定义滚动条（Webkit） ──
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(217, 203, 177, 0.35);
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgba(180, 155, 110, 0.65);
+    }
   }
-  .list li {
+
+  li {
     width: 100%;
+    // 保持原有宽度设置
   }
 
   .task-card {
@@ -459,6 +483,7 @@ onMounted(() => {
   }
 
   .card-text {
+    padding: 0 4px 0;
     margin: 0;
     font-size: 14px;
     line-height: 1.5;
@@ -474,8 +499,11 @@ onMounted(() => {
   .card-meta {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 11px;
     flex-wrap: wrap;
+    :deep(.el-tag) {
+      font-weight: 600; // 可选 400正常 / 500 / 600粗 / 700加粗
+    }
   }
 
   .card-date {
@@ -489,6 +517,7 @@ onMounted(() => {
     align-items: center;
     gap: 3px;
     font-size: 11px;
+    font-weight: 600;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
     color: var(--tape-plan);
     letter-spacing: 0.03em;
@@ -553,6 +582,7 @@ onMounted(() => {
       transform: scale(1.15);
     }
   }
+  
 
 }
 
