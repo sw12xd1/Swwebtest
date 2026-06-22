@@ -2,7 +2,7 @@
     <el-dialog
         v-model="visible"
         :title="isEdit ? '编辑睡眠记录' : '新增睡眠记录'"
-        width="480px"
+        width="50%"
         @close="handleClose"
     >
         <el-form :model="form" label-width="110px">

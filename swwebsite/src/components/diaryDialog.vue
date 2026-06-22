@@ -2,7 +2,7 @@
     <el-dialog
         v-model="visible"
         :title="isEdit ? '编辑日记' : '新增日记'"
-        width="600px"
+        width="50%"
         top="10vh"
         @close="handleClose"
     >
