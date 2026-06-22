@@ -42,19 +42,18 @@ const pageTitle = computed(() => {
 
 <style scoped lang="scss">
 .mobile-layout {
-  display: flex;
-  flex-direction: column;
+  position: relative;
   min-height: 100vh;
   max-width: 480px;
   margin: 0 auto;
   background: #f5f5f5;
+  padding-bottom: 56px;
 }
 
 .mobile-header {
   padding: 12px 16px;
   background: #fff;
   border-bottom: 1px solid #eee;
-  flex-shrink: 0;
 }
 
 .mobile-title {
@@ -66,16 +65,21 @@ const pageTitle = computed(() => {
 }
 
 .mobile-main {
-  flex: 1;
   padding: 12px;
 }
 
 .mobile-tabs {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
   display: flex;
   background: #fff;
   border-top: 1px solid #eee;
   padding: 6px 0 env(safe-area-inset-bottom, 6px);
-  flex-shrink: 0;
+  z-index: 100;
 }
 
 .tab-item {
