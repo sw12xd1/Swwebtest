@@ -7,29 +7,18 @@ const analyzeAndSave = async (id) => {
         const [rows] = await db.query('SELECT * FROM diary WHERE id = ?', [id])
         if (rows.length === 0) return
         const diary = rows[0]
+        const prompt = `
+        你是一位温暖、专业的心理健康助手。请根据用户今天的日记内容，给出一段充实、简短、有温度的状态分析，并附上一句真诚的鼓励。
+        【今日日记】
+        ${diary.content || '（用户今天未填写日记）'}
+        【要求】
+        - 分析控制在150字以内
+        - 语气温和、自然，像朋友在聊天
+        - 最后一句给出鼓励，要真诚不要空洞
+        - 直接输出内容，不要加任何标题或前缀
+        `.trim()
 
-        const prompt =  `
-            你是一位温暖、专业的心理健康助手。请根据用户今天的健康数据和日记内容，给出一段充实、简短、有温度的状态分析，并附上一句真诚的鼓励。
-
-            【今日数据】
-            - 日期：${diary.created_at}
-            - 情绪状态：${diary.moodScore} / 10
-            - 鼻塞程度：${diary.bisaiDegree} / 10
-            - 睡眠质量：${diary.sleepQuality} / 10
-            - 压力水平：${diary.stressLevel} / 10
-
-            【今日日记】
-            ${diary.content || '（用户今天未填写日记）'}
-
-            【要求】
-            - 分析控制在100字以内
-            - 语气温和、自然，像朋友在聊天
-            - 结合具体数据给出有针对性的分析，不要泛泛而谈
-            - 最后一句给出鼓励，要真诚不要空洞
-            - 直接输出内容，不要加任何标题或前缀
-            `.trim()
-
-         console.log(`日记${id} 开始分析`)
+        console.log(`日记${id} 开始分析`)
         const aiRes = await fetch('https://www.9527code.com/v1/messages', {
             method: 'POST',
             headers: {
@@ -48,7 +37,7 @@ const analyzeAndSave = async (id) => {
         const aiContent = aiData.content?.[0]?.text || ''
         await db.query('UPDATE diary SET aiContent=? WHERE id=?', [aiContent, id])
         console.log(`日记${id} AI 返回：${aiContent}`)
-        
+
     } catch (err) {
         console.error(`日记 ${id} AI 分析失败`, err)
     }
