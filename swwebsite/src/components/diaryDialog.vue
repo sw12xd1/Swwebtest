@@ -19,7 +19,7 @@
             </el-form-item>
 
             <el-form-item label="情绪评分">
-                <div style="width: 300px">
+                <div style="width: 180.34px">
                     <el-slider v-model="form.moodScore" :max="10" :step="0.1" />
                 </div>
                 <span style="margin-left: 12px; color: #909399">{{ form.moodScore }}</span>
@@ -99,7 +99,7 @@ const isEdit = computed(() => !!props.diaryRow?.id)
 
 const defaultForm = () => ({
     created_at: '',
-    moodScore: 5,
+    moodScore: 0,
     bisaiDegree: 0,
     sleepQuality: 0,
     stressLevel: 0,
