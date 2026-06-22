@@ -57,7 +57,8 @@ const pageTitle = computed(() => {
 .mobile-header {
   padding: 12px 16px;
   background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(30, 58, 95, 0.12);
+
 }
 
 .mobile-title {
@@ -83,7 +84,7 @@ const pageTitle = computed(() => {
   max-width: 480px;
   display: flex;
   background: transparent;
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-top: 1px solid rgba(30, 58, 95, 0.12);
   padding: 6px 0 env(safe-area-inset-bottom, 6px);
   z-index: 100;
 }

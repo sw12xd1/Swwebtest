@@ -47,7 +47,7 @@ const handleCollapse = () => {
     justify-content: space-between;
     padding: 0 15px;
     background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(30, 58, 95, 0.1);
     .flex-box{
         display: flex;
         justify-content: center;

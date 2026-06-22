@@ -48,7 +48,7 @@ const selectMenu = (key) => {
 <style scoped lang="scss">
 .el-aside {
   background: transparent !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(30, 58, 95, 0.1);
 }
 .menu-style {
     height: 100%;
@@ -58,9 +58,8 @@ const selectMenu = (key) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-        height: 51.4px;
+        border-bottom: 1px solid rgba(30, 58, 95, 0.1);
+        height: 70.6px;
     }
     .brand-text{
         font-size: 20px;
