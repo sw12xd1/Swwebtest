@@ -56,7 +56,7 @@ const pageTitle = computed(() => {
 
 .mobile-header {
   padding: 12px 16px;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 25%, #e0f2fe 50%, #d1f2eb 75%, #cce5ff 100%);
+  background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
@@ -71,6 +71,7 @@ const pageTitle = computed(() => {
 
 .mobile-main {
   padding: 12px;
+  background: transparent;
 }
 
 .mobile-tabs {
@@ -81,7 +82,7 @@ const pageTitle = computed(() => {
   width: 100%;
   max-width: 480px;
   display: flex;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 25%, #e0f2fe 50%, #d1f2eb 75%, #cce5ff 100%);
+  background: transparent;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   padding: 6px 0 env(safe-area-inset-bottom, 6px);
   z-index: 100;
