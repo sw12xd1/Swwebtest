@@ -104,4 +104,16 @@ onMounted(() => getPageData())
 .m-ai { display: flex; align-items: flex-start; gap: 6px; font-size: 12px; color: #67c23a; background: #f0f9eb; padding: 8px; border-radius: 8px; margin-bottom: 6px; }
 .m-card-actions { display: flex; justify-content: flex-end; border-top: 1px solid #f0f0f0; padding-top: 8px; }
 .m-pagination { display: flex; justify-content: center; margin-top: 16px; }
+
+/* 手机端覆盖 Dialog 宽度 */
+:deep(.el-dialog) {
+  width: 92% !important;
+  max-width: 92vw !important;
+}
+:deep(.el-dialog__body) {
+  padding: 16px 12px;
+}
+:deep(.el-form-item__label) {
+  width: 70px !important;
+}
 </style>

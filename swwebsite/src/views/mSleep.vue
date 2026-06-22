@@ -106,4 +106,16 @@ onMounted(() => getPageData())
 .m-card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
 .m-card-actions { display: flex; justify-content: flex-end; border-top: 1px solid #f0f0f0; padding-top: 8px; }
 .m-pagination { display: flex; justify-content: center; margin-top: 16px; }
+
+/* 手机端覆盖 Dialog 宽度 */
+:deep(.el-dialog) {
+  width: 92% !important;
+  max-width: 92vw !important;
+}
+:deep(.el-dialog__body) {
+  padding: 16px 12px;
+}
+:deep(.el-form-item__label) {
+  width: 70px !important;
+}
 </style>

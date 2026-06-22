@@ -167,4 +167,13 @@ onMounted(() => getPageData())
   justify-content: center;
   margin-top: 16px;
 }
+
+/* 手机端覆盖 Dialog 宽度 */
+:deep(.el-dialog) {
+  width: 92% !important;
+  max-width: 92vw !important;
+}
+:deep(.el-dialog__body) {
+  padding: 16px 12px;
+}
 </style>
