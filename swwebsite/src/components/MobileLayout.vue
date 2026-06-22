@@ -1,8 +1,5 @@
 <template>
   <div class="mobile-layout">
-    <header class="mobile-header">
-      <h1 class="mobile-title">{{ pageTitle }}</h1>
-    </header>
     <main class="mobile-main">
       <router-view />
     </main>
