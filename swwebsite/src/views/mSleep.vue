@@ -116,6 +116,6 @@ onMounted(() => getPageData())
   padding: 16px 12px;
 }
 :deep(.el-form-item__label) {
-  width: 70px !important;
+  width: 80px !important;
 }
 </style>
