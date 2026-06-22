@@ -8,7 +8,7 @@
 
       >
       <div class="brand">
-        <el-image style="width: 50px; height: 50px;" :src="IconUrl" />
+        <!-- <el-image style="width: 50px; height: 50px;" :src="IconUrl" /> -->
         <span v-show="!isCollapsed" class="brand-text">SWWebsite</span>
       </div>
 
@@ -60,6 +60,7 @@ const selectMenu = (key) => {
         justify-content: center;
         padding: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        height: 51.4px;
     }
     .brand-text{
         font-size: 20px;
