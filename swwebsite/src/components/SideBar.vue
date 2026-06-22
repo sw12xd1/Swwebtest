@@ -46,18 +46,36 @@ const selectMenu = (key) => {
 </script>
 
 <style scoped lang="scss">
+.el-aside {
+  background: transparent !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
 .menu-style {
     height: 100%;
+    background: transparent !important;
+    border-right: none !important;
     .brand{
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 10px;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     }
     .brand-text{
         font-size: 20px;
         margin-left: 7px;
+        color: #1e3a5f;
+        font-weight: 600;
     }
+}
+/* el-menu-item 默认白色背景覆盖掉 */
+.menu-style :deep(.el-menu-item) {
+  background: transparent !important;
+}
+.menu-style :deep(.el-menu-item:hover) {
+  background: rgba(255, 255, 255, 0.35) !important;
+}
+.menu-style :deep(.el-menu-item.is-active) {
+  background: rgba(255, 255, 255, 0.5) !important;
 }
 </style>

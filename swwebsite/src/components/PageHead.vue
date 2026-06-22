@@ -24,7 +24,14 @@ const props = defineProps({
     justify-content: space-between;
     .page-title {
         font-size: 24px;
-        color: #2d3748;
+        color: #1e3a5f;
+        font-weight: 600;
+        animation: titleIn 0.5s ease both;
     }
+}
+
+@keyframes titleIn {
+  from { opacity: 0; transform: translateY(-8px); letter-spacing: 4px; }
+  to   { opacity: 1; transform: translateY(0);   letter-spacing: 0; }
 }
 </style>

@@ -54,7 +54,8 @@
                 <el-input
                     v-model="form.content"
                     type="textarea"
-                    :rows="14"
+                    :rows="6"
+                    :autosize="{ minRows: 4, maxRows: 10 }"
                     placeholder="写下今天发生的事…"
                 />
             </el-form-item>
@@ -148,3 +149,29 @@ watch(() => form.value.created_at, async (date) => {
     }
 })
 </script>
+
+<style lang="scss" scoped>
+/* textarea 美化 */
+:deep(.el-textarea__inner) {
+  border-radius: 10px;
+  border: 1px solid #e0e6ed;
+  background: #fafbfc;
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 14px 16px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  resize: vertical;
+  max-height: 35vh;
+  min-height: 12vh;
+
+  &:focus {
+    border-color: #409eff;
+    box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.12);
+    background: #fff;
+  }
+
+  &::placeholder {
+    color: #c0c4cc;
+  }
+}
+</style>

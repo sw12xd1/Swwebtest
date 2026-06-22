@@ -586,6 +586,43 @@ onMounted(() => {
 
 }
 
+/* 任务卡片入场逐行动画 */
+.list li {
+  animation: cardIn 0.4s ease both;
+}
+@for $i from 1 through 20 {
+  .list li:nth-child(#{$i}) {
+    animation-delay: #{$i * 0.06}s;
+  }
+}
 
-  
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 标题动画 */
+.board-header .title {
+  animation: titleIn 0.5s ease both;
+}
+.board-header .subtitle {
+  animation: lineIn 0.4s ease both;
+  animation-delay: 0.15s;
+}
+
+@keyframes titleIn {
+  from { opacity: 0; transform: translateY(-8px); letter-spacing: 4px; }
+  to   { opacity: 1; transform: translateY(0);   letter-spacing: 0; }
+}
+
+@keyframes lineIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+
+/* 空状态固定高度，避免加载后跳动 */
+:deep(.el-empty) {
+  min-height: 81.6px;
+}
 </style>

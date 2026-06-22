@@ -117,3 +117,56 @@ onMounted(() => {
     getPageData()
 })
 </script>
+
+<style lang="scss" scoped>
+/* 表格容器 - 白色毛玻璃卡片 */
+:deep(.el-table) {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.08);
+  min-height: 41.83px;
+}
+
+:deep(.el-table th) {
+  background: rgba(30, 58, 95, 0.06) !important;
+  color: #1e3a5f;
+  font-weight: 600;
+}
+
+:deep(.el-table tr) {
+  animation: cardIn 0.4s ease both;
+}
+
+/* 逐行延迟动画 */
+@for $i from 1 through 20 {
+  :deep(.el-table tbody tr:nth-child(#{$i})) {
+    animation-delay: #{$i * 0.05}s;
+  }
+}
+
+:deep(.el-pagination) {
+  justify-content: center;
+}
+
+/* 空状态高度与数据行一致 */
+:deep(.el-table .el-table__empty-block) {
+  min-height: 81.6px !important;
+  height: 81.6px !important;
+}
+:deep(.el-table .el-table__empty-text) {
+  padding: 0 !important;
+  line-height: 81.6px !important;
+}
+
+/* 桌面端 textarea 最大高度限制 */
+:deep(.el-textarea__inner) {
+  max-height: 280px;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>

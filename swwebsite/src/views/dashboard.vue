@@ -145,3 +145,49 @@ onMounted(() => {
 
 </script>
 
+<style lang="scss" scoped>
+:deep(.el-table) {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.08);
+  min-height: 41.83px;
+}
+
+:deep(.el-table th) {
+  background: rgba(30, 58, 95, 0.06) !important;
+  color: #1e3a5f;
+  font-weight: 600;
+}
+
+:deep(.el-table tr) {
+  animation: cardIn 0.4s ease both;
+}
+
+@for $i from 1 through 20 {
+  :deep(.el-table tbody tr:nth-child(#{$i})) {
+    animation-delay: #{$i * 0.05}s;
+  }
+}
+
+:deep(.el-pagination) {
+  justify-content: center;
+}
+
+/* 空状态高度与数据行一致 */
+:deep(.el-table .el-table__empty-block) {
+  min-height: 41.83px !important;
+  height: 41.83px !important;
+}
+:deep(.el-table .el-table__empty-text) {
+  padding: 0 !important;
+  line-height: 41.83px !important;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+
