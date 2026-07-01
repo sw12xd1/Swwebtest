@@ -19,7 +19,7 @@ const analyzeAndSave = async (id) => {
         `.trim()
 
         console.log(`日记${id} 开始分析`)
-        const aiRes = await fetch('https://www.9527code.com/v1/messages', {
+        const aiRes = await fetch('https://cdn.9527code.com/v1/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
