@@ -27,7 +27,7 @@ const analyzeAndSave = async (id) => {
                 'anthropic-version': '2023-06-01',
             },
             body: JSON.stringify({
-                model: 'qwen/qwen3-next-80b-a3b-instruct',
+                model: 'doubao-seed-1-8-251228',
                 max_tokens: 1000,
                 messages: [{ role: 'user', content: prompt }],
             }),
