@@ -83,7 +83,7 @@ const isEdit = computed(() => !!props.sleepRow?.id)
 
 const defaultForm = () => ({
     created_at: '', 
-    sleepTime: '',
+    sleepTime: '00:00',
     heartRate: 60,
     isNoise: 0,
     isBisai: 0,
