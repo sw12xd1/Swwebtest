@@ -3,6 +3,7 @@
         v-model="visible"
         :title="isEdit ? '编辑日记' : '新增日记'"
         width="50%"
+        bottom="100px"
         @close="handleClose"
     >
         <el-form :model="form" label-width="90px">
