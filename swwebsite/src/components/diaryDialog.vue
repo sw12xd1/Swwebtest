@@ -3,7 +3,7 @@
         v-model="visible"
         :title="isEdit ? '编辑日记' : '新增日记'"
         width="50%"
-        bottom="100px"
+        custom-class="diary-dialog-bottom"
         @close="handleClose"
     >
         <el-form :model="form" label-width="90px">
@@ -152,6 +152,17 @@ watch(() => form.value.created_at, async (date) => {
 </script>
 
 <style lang="scss" scoped>
+    
+:deep(.diary-dialog-bottom .el-dialog) {
+  position: fixed !important;
+  bottom: 100px !important; /* 距离底部100px */
+  top: auto !important;    /* 清除默认居中top */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0 !important;
+}
+
+    
 /* textarea 美化 */
 :deep(.el-textarea__inner) {
   border-radius: 10px;
