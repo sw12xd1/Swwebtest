@@ -98,7 +98,7 @@ const visible = computed({
 const isEdit = computed(() => !!props.diaryRow?.id)
 
 const defaultForm = () => ({
-    created_at: '',
+    created_at: new Date().toISOString().split('T')[0],
     moodScore: 0,
     bisaiDegree: 0,
     sleepQuality: 0,
