@@ -169,9 +169,24 @@ const filters = [
 
 // 过滤器 计算
 const visibleTasks = computed(() => {
-  if (filter.value === 'active') return tasks.value.filter((t) => !t.status)
-  if (filter.value === 'done')   return tasks.value.filter((t) =>  t.status)
-  return tasks.value
+  let list = [...tasks.value]
+  if (filter.value === 'active') {
+    list = list.filter((t) => !t.status)
+  } else if (filter.value === 'done') {
+    list = list.filter((t) => t.status)
+  }
+
+  // 排序规则
+  list.sort((a, b) => {
+    // 未完成优先
+    if (a.status !== b.status) {
+      return a.status - b.status
+    }
+    // 截止日期升序，无截止日期放最后
+    const getTs = (task) => task.deadline ? new Date(task.deadline) : new Date(9999, 12, 31)
+    return getTs(a) - getTs(b)
+  })
+  return list
 })
 
 // 已完成任务数量
