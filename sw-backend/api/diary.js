@@ -26,7 +26,7 @@ const analyzeAndSave = async (id) => {
                 'Authorization': `Bearer sk-anDOhBClsXJiUCsOCnnFPTQm6GpH6kPQadXTZaK8Tc8TmtcI`,
             },
             body: JSON.stringify({
-                model: 'qwen3-vl-flash',
+                model: 'gpt-3.5-turbo',
                 max_tokens: 1000,
                 messages: [{ role: 'user', content: prompt }],
             }),
