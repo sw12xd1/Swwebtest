@@ -23,8 +23,7 @@ const analyzeAndSave = async (id) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': 'sk-anDOhBClsXJiUCsOCnnFPTQm6GpH6kPQadXTZaK8Tc8TmtcI',
-                'anthropic-version': '2023-06-01',
+                'Authorization': `Bearer sk-anDOhBClsXJiUCsOCnnFPTQm6GpH6kPQadXTZaK8Tc8TmtcI`,
             },
             body: JSON.stringify({
                 model: 'qwen3-vl-flash',
