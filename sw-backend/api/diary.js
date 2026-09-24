@@ -26,7 +26,7 @@ const analyzeAndSave = async (id) => {
                 'Authorization': `Bearer sk-anDOhBClsXJiUCsOCnnFPTQm6GpH6kPQadXTZaK8Tc8TmtcI`,
             },
             body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
+                model: 'claude-haiku-4-5',
                 max_tokens: 1000,
                 messages: [{ role: 'user', content: prompt }],
             }),
