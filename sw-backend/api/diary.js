@@ -19,14 +19,15 @@ const analyzeAndSave = async (id) => {
         `.trim()
 
         console.log(`日记${id} 开始分析`)
-        const aiRes = await fetch('https://9527.codes/v1/chat/completions', {
+        const aiRes = await fetch('https://cdn.9527.codes/v1/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer sk-anDOhBClsXJiUCsOCnnFPTQm6GpH6kPQadXTZaK8Tc8TmtcI`,
+                'x-api-key': 'sk-anDOhBClsXJiUCsOCnnFPTQm6GpH6kPQadXTZaK8Tc8TmtcI',
+                'anthropic-version': '2023-06-01',
             },
             body: JSON.stringify({
-                model: 'claude-haiku-4-5',
+                model: 'claude-sonnet-5',
                 max_tokens: 1000,
                 messages: [{ role: 'user', content: prompt }],
             }),
